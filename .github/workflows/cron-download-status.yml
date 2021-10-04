@@ -1,0 +1,29 @@
+name: Download latest COVID-19 Status vaccination
+
+on:
+  schedule:
+    - cron: 20 * * * *
+
+jobs:
+  downloadStatus:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+
+      - name: Install CURL🔧✅
+        run: |
+          sudo apt update
+          sudo apt upgrade
+          sudo apt install curl
+      
+      - name: DownloadData
+        run: | 
+          bash ${{ github.workspace }}/download.sh
+          git config user.name aminch18
+          git config user.email experimentalaminch@outlook.com
+          git add .
+          git commit -m "Add report for today"
+          git push
