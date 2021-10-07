@@ -10,9 +10,6 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
-        with:
-          persist-credentials: false
-
       - name: Install CURL🔧✅
         run: |
           sudo apt update
@@ -22,8 +19,6 @@ jobs:
       - name: DownloadData
         run: | 
           bash ${{ github.workspace }}/scripts/download.sh
-          git config user.name aminch18
-          git config user.email experimentalaminch@outlook.com
           git add .
           git commit -m "Add report for today"
           git push
