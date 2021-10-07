@@ -21,7 +21,7 @@ jobs:
       
       - name: DownloadData
         run: | 
-          bash ${{ github.workspace }}/download.sh
+          bash ${{ github.workspace }}/scripts/download.sh
           git config user.name aminch18
           git config user.email experimentalaminch@outlook.com
           git add .
