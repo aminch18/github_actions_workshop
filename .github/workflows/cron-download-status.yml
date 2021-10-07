@@ -19,6 +19,8 @@ jobs:
       - name: DownloadData
         run: | 
           bash ${{ github.workspace }}/scripts/download.sh
+          git config --global user.email experimentalaminch@outlook.com
+          git config --global user.name aminch18
           git add .
           git commit -m "Add report for today"
           git push
