@@ -23,11 +23,6 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@master
         
-      - name: "Azure Login"
-        uses: Azure/login@v1.1
-        with:
-        creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.AZ_SUSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
-
       - name: Terraform Init
         uses: hashicorp/terraform-github-actions@master
         with:
