@@ -1,5 +1,6 @@
 name: Deploy App Service CI/CD
 on:
+  workflow_dispatch:
   push:
     branches:
       - 2.0/deployAppService
