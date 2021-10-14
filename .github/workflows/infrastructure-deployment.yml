@@ -1,7 +1,13 @@
 name: "Terraform Deploy"
 on:
+  push: 
+    branches:
+      - 3.0/usingTerraform
+
   pull_request:
     types: [opened, edited, synchronize]
+    branches:
+      - 3.0/usingTerraform
     
 jobs:
   terraform:
@@ -50,10 +56,10 @@ jobs:
           tf_actions_comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
-          TF_VAR_agent_client_secret: ${{ secrets.TF_VAR_agent_client_secret }}
-          TF_VAR_subscription_id: ${{ secrets.TF_VAR_subscription_id }}
-          TF_VAR_tenant_id: ${{ secrets.TF_VAR_tenant_id }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          AZ_SUSCRIPTION_ID: ${{ secrets.AZ_SUSCRIPTION_ID }}
+          TENANT_ID: ${{ secrets.TENANT_ID }}
           
       - name: "Terraform Apply"
         uses: hashicorp/terraform-github-actions@master
@@ -64,7 +70,7 @@ jobs:
           tf_actions_comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
-          TF_VAR_agent_client_secret: ${{ secrets.TF_VAR_agent_client_secret }}
-          TF_VAR_subscription_id: ${{ secrets.TF_VAR_subscription_id }}
-          TF_VAR_tenant_id: ${{ secrets.TF_VAR_tenant_id }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          AZ_SUSCRIPTION_ID: ${{ secrets.AZ_SUSCRIPTION_ID }}
+          TENANT_ID: ${{ secrets.TENANT_ID }}
