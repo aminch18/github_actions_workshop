@@ -3,12 +3,12 @@ on:
   workflow_dispatch:
   push: 
     branches:
-      - 3.0/usingTerraform
+      - terraformMaster
 
   pull_request:
     types: [opened, edited, synchronize]
     branches:
-      - 3.0/usingTerraform
+      - terraformMaster
     
 jobs:
   terraform:
