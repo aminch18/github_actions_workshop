@@ -26,7 +26,7 @@ jobs:
       - name: "Azure Login"
         uses: Azure/login@v1.1
         with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Terraform Init
         uses: hashicorp/terraform-github-actions@master
