@@ -22,11 +22,6 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@master
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> master
       - name: "Terraform Init"
         uses: hashicorp/setup-terraform@v1
         with:
