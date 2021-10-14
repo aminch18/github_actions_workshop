@@ -1,36 +1,48 @@
-const STORAGE_KEY = "tasksList.storage";
+import { v4 as uuidv4 } from "uuid";
+let mockedTasks = [
+  {
+    id: uuidv4().toString(),
+    Priority: "Critical ⚠",
+    AssignedTo: "👩🏽‍🦰 Mari",
+    CreatedBy: "Amin 👨🏻‍💼",
+    CreatedDateTime: new Date(2021,4,15).toLocaleString(),
+    State: "Completed ✅",
+  },
+  {
+    id: uuidv4().toString(),
+    AssignedTo: "Amin 👨🏻‍💼",
+    Priority: "Major ☢",
+    CreatedBy: "Amin 👨🏻‍💼",
+    CreatedDateTime: new Date(2021,4,24).toLocaleString(),
+    State: "In Progress 🕐",
+  },
+  {
+    id: uuidv4().toString(),
+    Priority: "Low 🟡",
+    AssignedTo: "🧑🏼 Juan",
+    CreatedBy: "Amin 👨🏻‍💼",
+    CreatedDateTime: new Date().toLocaleString(),
+    State: "To Do ❗❗",
+  },
+  {
+    id: uuidv4().toString(),
+    Priority: "High 🔴",
+    AssignedTo: "👱🏽‍♂️ Jose",
+    CreatedBy: "Amin 👨🏻‍💼",
+    CreatedDateTime: new Date(2021,4,12).toLocaleString(),
+    State: "Completed ✅",
+  },
+  {
+    id: uuidv4().toString(),
+    Priority: "Medium 🟠",
+    AssignedTo: "👩🏻 Paula",
+    CreatedBy: "Amin 👨🏻‍💼",
+    CreatedDateTime: new Date(2021,4,22).toLocaleString(),
+    State: "In Progress 🕐",
+  }
+];
 
-const setItemOnStorage = (data) =>
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+export const getAllTasks = () => mockedTasks;
 
-export const initStorage = () =>
-  localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
-
-export const getAllTasks = () => JSON.parse(localStorage.getItem(STORAGE_KEY));
-
-export const createTask = (data) => {
-  data.CreatedDateTime = new Date().toLocaleString();
-  let allTasks = getAllTasks();
-  allTasks.push(data);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(allTasks));
-};
-
-export const updateTask = (data) => {
-  const allTasks = getAllTasks();
-  const taskIndex = allTasks.findIndex((task) => task.id === data.id);
-  allTasks[taskIndex] = data;
-  setItemOnStorage(allTasks);
-  return {
-    isEdited: true,
-    editedIncident: allTasks[taskIndex],
-  };
-};
-
-export const deleteTask = (id) => {
-  const allTasks = getAllTasks();
-  const taskIndex = allTasks.findIndex((task) => task.id === id);
-  allTasks.splice(taskIndex, 1);
-  setItemOnStorage(allTasks);
-};
-
-export const cleanStorage = () => localStorage.clear();
+export const getTask = (data) =>
+  mockedTasks.find((task) => task.id === data.id);
