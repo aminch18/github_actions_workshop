@@ -3,7 +3,7 @@ name: Node.js Download latest COVID-19 Status vaccination
 on:
   workflow_dispatch:
   schedule:
-    - cron: 5 * * * *
+    - cron: 59 * * * *
 
 env:
   NODE_VERSION: 14.x
