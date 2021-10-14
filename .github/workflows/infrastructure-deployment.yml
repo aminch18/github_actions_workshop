@@ -14,11 +14,6 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
-    env:
-        CLIENT_ID: ${{ secrets.CLIENT_ID }}
-        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-        AZ_SUSCRIPTION_ID: ${{ secrets.AZ_SUSCRIPTION_ID }}
-        TENANT_ID: ${{ secrets.TENANT_ID }}
 
     defaults:
       run:
@@ -59,4 +54,3 @@ jobs:
           tf_actions_subcommand: "apply"
           tf_actions_working_dir: "./terraform"
           tf_actions_comment: true
-       

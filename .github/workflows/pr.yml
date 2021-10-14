@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [opened, edited, synchronize]
     branches:
-      - 2.0/deployAppService
+      - masterAppService
 
 env:
   NODE_VERSION: "14.x"
