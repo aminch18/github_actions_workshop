@@ -2,14 +2,15 @@ provider "azurerm" {
   version = "=2.0.0"
   tenant_id       = var.tenant_id
   subscription_id = var.subscription_id
-  client_id       = var.agent_client_id
-  client_secret   = var.agent_client_secret
+  client_id       = var.client_id
+  client_secret   = var.client_secret
 
   features {}
 }
 
 terraform {
   backend "azurerm" {
+    resource_group_name  = "rg-github-actions-ws"
     storage_account_name = "tfbackend024356e"
     container_name       = "terraform-state"
     key                  = "terraform.tfstate"
