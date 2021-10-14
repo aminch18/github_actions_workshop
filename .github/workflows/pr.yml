@@ -29,4 +29,8 @@ jobs:
         run: |
           npm install
           npm run-script build 
+<<<<<<< HEAD
           npm run-script test --if-present
+=======
+          npm run-script test --if-present
+>>>>>>> master
