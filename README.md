@@ -9,11 +9,19 @@ Branches:
 
 ### 2.0 Deployments on Azure.
 Branches:
+    1.0/deployAppService
+    1.1/deployAppService
+    1.2/deployAppService
     2.0/deployAppService
-    2.0/buildImageOnAcr
-    2.0/multiStageDeployment
+    2.0/deployAppService
 
-### 3.0 Creating infrastructure on Azure.
+Main branch: masterAppService
+
+<!-- ### 3.0 Creating infrastructure on Azure.
 Branches:
     3.0/usingTerraform
-    3.0/usingAzureBicep
+    3.1/usingTerraform
+    3.2/usingTerraform
+    3.3/usingTerraform
+
+Main branch: terraformMaster -->
