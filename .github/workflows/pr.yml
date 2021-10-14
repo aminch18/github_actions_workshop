@@ -1,0 +1,30 @@
+# name: PR CI
+# on:
+#   pull_request:
+#     types: [opened, edited, synchronize]
+
+# env:
+#   NODE_VERSION: "14.x"
+#   PACKAGE_PATH: ./build
+#   ARTIFACT_NAME: react-webapp
+
+# jobs:
+#   build:
+#     name: Build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout 🛎️
+#         uses: actions/checkout@v2.3.1
+#         with:
+#           persist-credentials: false
+
+#       - name: Use Node.js 14.x
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: ${{ env.NODE_VERSION }}
+
+#       - name: Install, Build & Tests 🔧✅
+#         run: |
+#           npm install
+#           npm run-script build 
+#           npm run-script test --if-present

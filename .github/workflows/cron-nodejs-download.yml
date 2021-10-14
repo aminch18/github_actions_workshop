@@ -1,0 +1,33 @@
+name: Node.js Download latest COVID-19 Status vaccination
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 5 * * * *
+
+env:
+  NODE_VERSION: 14.x
+
+jobs:
+  downloadStatus:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+        with:
+          ref: 1.0/cronWithNodejsScript
+          
+      - name: Use Node.js version 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - run: npm install
+      - run: npm run download-today-status
+      - run: |
+            git config user.email experimentalaminch@outlook.com
+            git config user.name aminch18
+            git add .
+            git commit -m "Add report for today"
+            git push

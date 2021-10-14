@@ -1,0 +1,106 @@
+# name: Master CI/CD
+# on:
+#   push:
+#     branches:
+#       - master
+
+# env:
+#   AZURE_WEBAPP_NAME: "ghactions-codenoobs"
+#   PACKAGE_PATH: ./build
+#   AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace }}/react-webapp
+#   NODE_VERSION: 14.x
+#   ARTIFACT_NAME: react-webapp
+#   DEV_SLOT_NAME: dev
+#   STG_SLOT_NAME: staging
+
+# jobs:
+#   build:
+#     name: Build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout 🛎️
+#         uses: actions/checkout@v2.3.1
+#         with:
+#           persist-credentials: false
+
+#       - name: Use Node.js 14.x
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: ${{ env.NODE_VERSION }}
+
+#       - name: Install, Build & Tests 🔧✅
+#         run: |
+#           npm install
+#           npm run-script build 
+#           npm run-script test
+
+#       - name: Upload Built WebApp ⬆
+#         uses: actions/upload-artifact@v1
+#         with:
+#           name: ${{ env.ARTIFACT_NAME }}
+#           path: ${{ env.PACKAGE_PATH }}
+
+#   dev:
+#     needs: build
+#     environment:
+#       name: dev
+#       url: ${{ steps.deploy_dev.outputs.webapp-url }}
+#     name: Deploy to DEV
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Download Built WebApp ⬇
+#         uses: actions/download-artifact@v1
+#         with:
+#           name: ${{ env.ARTIFACT_NAME }}
+
+#       - name: Deploy to Azure WebApp 🚀
+#         uses: azure/webapps-deploy@v2
+#         id: deploy_dev
+#         with:
+#           app-name: ${{ env.AZURE_WEBAPP_NAME }}
+#           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+#           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+#           slot-name: ${{ env.DEV_SLOT_NAME }}
+
+#   staging:
+#     needs: dev
+#     environment:
+#       name: staging
+#       url: ${{ steps.deploy_staging.outputs.webapp-url }}
+#     name: Deploy to STG
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Download Built WebApp ⬇
+#         uses: actions/download-artifact@v1
+#         with:
+#           name: ${{ env.ARTIFACT_NAME }}
+
+#       - name: Deploy to Azure WebApp 🚀
+#         uses: azure/webapps-deploy@v2
+#         id: deploy_staging
+#         with:
+#           app-name: ${{ env.AZURE_WEBAPP_NAME }}
+#           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+#           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+#           slot-name: ${{ env.STG_SLOT_NAME }}
+
+#   deploy:
+#     needs: staging
+#     environment:
+#       name: production
+#       url: ${{ steps.deploy_production.outputs.webapp-url }}
+#     name: Deploy to PRD
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Download Built WebApp ⬇
+#         uses: actions/download-artifact@v1
+#         with:
+#           name: ${{ env.ARTIFACT_NAME }}
+
+#       - name: Deploy to Azure WebApp🚀
+#         id: deploy_production
+#         uses: azure/webapps-deploy@v2
+#         with:
+#           app-name: ${{ env.AZURE_WEBAPP_NAME }}
+#           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+#           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
