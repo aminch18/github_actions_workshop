@@ -14,11 +14,6 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
-    env:
-        CLIENT_ID: ${{ secrets.CLIENT_ID }}
-        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-        AZ_SUSCRIPTION_ID: ${{ secrets.AZ_SUSCRIPTION_ID }}
-        TENANT_ID: ${{ secrets.TENANT_ID }}
 
     defaults:
       run:
@@ -28,6 +23,11 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@master
         
+      - name: "Azure Login"
+        uses: Azure/login@v1.1
+        with:
+        creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.AZ_SUSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
+
       - name: Terraform Init
         uses: hashicorp/terraform-github-actions@master
         with:
