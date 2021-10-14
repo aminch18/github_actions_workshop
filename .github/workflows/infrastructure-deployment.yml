@@ -52,11 +52,5 @@ jobs:
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: "apply"
-<<<<<<< HEAD
-          tf_actions_working_dir: ${{ github.workspace }}/terraform"
-          tf_actions_comment: true
-       
-=======
           tf_actions_working_dir: "./terraform"
           tf_actions_comment: true
->>>>>>> master
