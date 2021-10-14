@@ -1,26 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
-import { createTask } from "../services/tasksServices";
-import { v4 as uuidv4 } from "uuid";
+import { updateTask } from "../services/tasksServices";
 
-export const CreateTask = ({ taskCreated }) => {
+export const EditTaskModal = ({ task, taskEdited }) => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data, e) => {
-    const task = { id: uuidv4(), ...data };
-    createTask(task);
-    taskCreated();
-    e.target.reset();
+  const onSubmit = (data) => {
+    const { id, CreatedDateTime } = task;
+    const updatedTask = {
+      ...data,
+      CreatedDateTime: CreatedDateTime,
+      id: id,
+    };
+
+    const response = updateTask(updatedTask);
+    taskEdited(response);
+    setShow(false);
   };
+
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-12 mrgnbtm">
-          <h2>Tasks List</h2>
+    <>
+      <Button variant="warning" onClick={handleShow}>
+        Edit
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Task Edit</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
               <div className="form-group col-md-6">
-                <label htmlFor="exampleInputEmail1">Assignee</label>
+                <label>Assignee</label>
                 <input
                   type="text"
                   className="form-control"
@@ -33,7 +51,7 @@ export const CreateTask = ({ taskCreated }) => {
                 />
               </div>
               <div className="form-group col-md-6">
-                <label htmlFor="exampleInputEmail1">Grop of Creation:</label>
+                <label>Grop of Creation:</label>
                 <select
                   className="form-control"
                   name="CreatedBy"
@@ -46,10 +64,23 @@ export const CreateTask = ({ taskCreated }) => {
                 </select>
               </div>
               <div className="form-group col-md-6">
-                <label htmlFor="exampleInputEmail1">Priority:</label>
+                <label>Priority:</label>
                 <select
                   className="form-control"
                   name="Priority"
+                  ref={register}
+                  id="sel1"
+                >
+                  <option>High</option>
+                  <option>Medium</option>
+                  <option>Low</option>
+                </select>
+              </div>
+              <div className="form-group col-md-6">
+                <label>Status:</label>
+                <select
+                  className="form-control"
+                  name="State"
                   ref={register}
                   id="sel1"
                 >
@@ -62,25 +93,11 @@ export const CreateTask = ({ taskCreated }) => {
                   <option>Done - In Prod</option>
                 </select>
               </div>
-              <div className="form-group col-md-6">
-                <label htmlFor="exampleInputEmail1">Status:</label>
-                <select
-                  className="form-control"
-                  name="State"
-                  ref={register}
-                  id="sel1"
-                >
-                  <option>Open</option>
-                  <option>Wait for external</option>
-                  <option>Resolved</option>
-                  <option>Closed</option>
-                </select>
-              </div>
             </div>
             <input type="submit" className="btn btn-danger" />
           </form>
-        </div>
-      </div>
-    </div>
+        </Modal.Body>
+      </Modal>
+    </>
   );
 };

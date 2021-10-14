@@ -8,6 +8,7 @@ import "./App.css";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
+  const [isTaskEdited, setTaskEdited] = useState(false);
   const [numberOfTasks, setNumberOfTasks] = useState(0);
   const fetchData = useRef(() => {});
 
@@ -19,7 +20,10 @@ const App = () => {
 
   useEffect(() => {
     fetchData.current();
-  }, [fetchData, numberOfTasks]);
+    setTaskEdited(false);
+  }, [fetchData, numberOfTasks, isTaskEdited]);
+
+  const taskEdited = (data) => setTaskEdited(data.isEdited);
 
   const taskCreated = () => setNumberOfTasks(numberOfTasks + 1);
 
@@ -39,7 +43,11 @@ const App = () => {
         </div>
       </div>
       <div className="row mrgnbtm">
-        <TasksTable tasks={tasks} deleteHandler={deleteTaskHandler} />
+        <TasksTable
+          tasks={tasks}
+          taskEdited={taskEdited}
+          deleteHandler={deleteTaskHandler}
+        />
       </div>
     </div>
   );
