@@ -42,14 +42,6 @@ resource "azurerm_app_service_plan" "appserviceplan" {
   }
 }
 
-resource "azurerm_application_insights" "insights" {
-    name                = var.insights-name
-    location            = "${azurerm_resource_group.rg.location}"
-    resource_group_name = "${azurerm_resource_group.rg.name}"
-    application_type    = "web"
-    retention_in_days   = 730
-}
-
 # Create an Azure Web App for Containers in that App Service Plan
 resource "azurerm_app_service" "webapp" {
   name                = var.web_app_name
@@ -61,7 +53,6 @@ resource "azurerm_app_service" "webapp" {
     DOCKER_REGISTRY_SERVER_URL      = "https://${azurerm_container_registry.acr.login_server}"
     DOCKER_REGISTRY_SERVER_USERNAME = "${azurerm_container_registry.acr.admin_username}"
     DOCKER_REGISTRY_SERVER_PASSWORD = "${azurerm_container_registry.acr.admin_password}"
-    APPINSIGHTS_INSTRUMENTATIONKEY =  "${azurerm_application_insights.insights.instrumentation_key}"
   }
   site_config {
     linux_fx_version = "DOCKER|${var.container_registry_name}:${var.tag_name}"
