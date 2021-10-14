@@ -19,20 +19,43 @@ jobs:
         CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
         AZ_SUSCRIPTION_ID: ${{ secrets.AZ_SUSCRIPTION_ID }}
         TENANT_ID: ${{ secrets.TENANT_ID }}
+
+    defaults:
+      run:
+        shell: bash
         
     steps:
       - name: "Checkout"
         uses: actions/checkout@master
         
       - name: Terraform Init
-        run: terraform init
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.13
+          tf_actions_subcommand: "plan"
+          tf_actions_working_dir: "./terraform"
+          tf_actions_comment: true
 
       - name: "Terraform Validate"
-        run: terraform validate
+        with:
+          tf_actions_version: 0.12.13
+          tf_actions_subcommand: 'validate'
+          tf_actions_working_dir: "./terraform"
+          tf_actions_comment: true
 
-      - name: Terraform Plan
-        run: terraform plan
+      - name: "Terraform Plan"
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.13
+          tf_actions_subcommand: "plan"
+          tf_actions_working_dir: "./terraform"
+          tf_actions_comment: true
           
       - name: "Terraform Apply"
-        run: terraform apply
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.13
+          tf_actions_subcommand: "apply"
+          tf_actions_working_dir: "./terraform"
+          tf_actions_comment: true
        
