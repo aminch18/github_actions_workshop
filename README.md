@@ -4,8 +4,7 @@
 
 ### 1.0 Download data automation.
 Branches:
-    1.0/cronDownloadWithCurlScript
-    1.0/cronDownloadWithCurlAction
+    1.0/cronDownloadWithBashScript
     1.0/cronWithNodejsScript
 
 ### 2.0 Deployments on Azure.
