@@ -23,11 +23,7 @@ variable "resource_group_name" {
     description = "Azure Resource Group Name."
     default = "rg-github-actions-wshop"
 }
-variable "insights-name" {
-    type        = string
-    description = "Azure Resource Group Name."
-    default = "insights-github-actions-wshop"
-}
+
 variable "web_app_name" {
     type        = string
     description = "Azure Resource Group Name."
