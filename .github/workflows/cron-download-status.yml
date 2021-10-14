@@ -1,15 +1,20 @@
 name: Download latest COVID-19 Status vaccination
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: 20 * * * *
+    - cron: 5 * * * *
 
 jobs:
   downloadStatus:
+    name: Download data
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
+        with:
+          ref: 1.0/cronDownloadWithBashScript
+
       - name: Install CURL🔧✅
         run: |
           sudo apt update
@@ -21,6 +26,7 @@ jobs:
           bash ${{ github.workspace }}/scripts/download.sh
           git config user.email experimentalaminch@outlook.com
           git config user.name aminch18
+          git checkout 1.0/cronDownloadWithBashScript
           git add .
           git commit -m "Add report for today"
           git push
