@@ -1,17 +1,18 @@
 name: Deploy App Service CI/CD
 on:
+  workflow_dispatch:
   push:
     branches:
-      - 2.0/deployAppService
+      - masterAppService
 
 env:
-  AZURE_WEBAPP_NAME: "staticpage"
+  AZURE_WEBAPP_NAME: "react-webapp-githubaction-ws"
   PACKAGE_PATH: ./build
   AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace }}/react-webapp
   NODE_VERSION: 14.x
   ARTIFACT_NAME: react-webapp
-  DEV_SLOT_NAME: dev
-  STG_SLOT_NAME: staging
+  DEV_SLOT_NAME: react-webapp-githubaction-dev
+  STG_SLOT_NAME: react-webapp-githubaction-stg
 
 jobs:
   build:
