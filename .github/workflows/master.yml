@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - 2.0/deployAppService
+      - masterAppService
 
 env:
   AZURE_WEBAPP_NAME: "staticpage"
