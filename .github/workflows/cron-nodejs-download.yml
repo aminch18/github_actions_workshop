@@ -10,14 +10,14 @@ env:
 
 jobs:
   downloadStatus:
+    name: Download data
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
         with:
           ref: 1.0/cronWithNodejsScript
-          
+
       - name: Use Node.js version 14.x
         uses: actions/setup-node@v1
         with:
