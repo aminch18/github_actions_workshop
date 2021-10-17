@@ -9,12 +9,6 @@ on:
     types: [opened, edited, synchronize]
     branches:
       - terraformMaster
-    
-env:
-  R_GROUP_NAME: rg-github-actions-ws
-  STORAGE_ACC_NAME: tfbackend024356e
-  CONTAINER_NAME: terraform-state
-  BLOB_NAME: terraform.tfstate
 
 jobs:
   terraform:
