@@ -28,16 +28,18 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@master
-        
-      - name: Terraform init azurerm backend
-        uses: ahmedig/terraform-azurerm-backend@v1
+
+      - name: Azure login
+        uses: azure/login@v1
         with:
-          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
-          resource_group_name: ${{ env.R_GROUP_NAME }}
-          container_name: ${{ env.STORAGE_ACC_NAME }}
-          storage_account_name: ${{ env.CONTAINER_NAME }}
-          file_name: ${{ env.BLOB_NAME }}
-          tf_working_directory: terraform
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.9
+
+      - name: Terraform init
+        run:  terraform init -upgrade
 
       - name: Terraform Plan🔧
         run: terraform plan
