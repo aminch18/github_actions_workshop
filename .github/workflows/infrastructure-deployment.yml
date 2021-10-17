@@ -18,6 +18,7 @@ jobs:
     defaults:
       run:
         shell: pwsh
+        working-directory: terraform
         
     steps:
       - name: "Checkout"
