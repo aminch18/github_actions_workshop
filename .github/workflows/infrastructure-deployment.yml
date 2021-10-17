@@ -35,7 +35,7 @@ jobs:
           resource_group_name: ${{ env.R_GROUP_NAME }}
           container_name: ${{ env.STORAGE_ACC_NAME }}
           storage_account_name: ${{ env.CONTAINER_NAME }}
-          tf_working_directory: tfdirectory
+          tf_working_directory: terraform
 
       - name: Terraform Plan🔧
         run: terraform plan
