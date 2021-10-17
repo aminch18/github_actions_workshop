@@ -9,16 +9,21 @@ on:
     types: [opened, edited, synchronize]
     branches:
       - terraformMaster
+env:
+  ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+  ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZ_SUSCRIPTION_ID }}
 
 jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
-
+    
     defaults:
       run:
-        shell: pwsh
-        working-directory: terraform
+        shell: bash
+        working-directory: scripts
         
     steps:
       - name: "Checkout"
