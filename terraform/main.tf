@@ -1,7 +1,3 @@
-provider "azurerm" {
-  features {}
-}
-
 terraform {
   backend "azurerm" {
     resource_group_name  = "rg-github-actions-ws"
@@ -14,6 +10,7 @@ terraform {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "=2.46.0"
+    }
   }
 }
 
@@ -70,4 +67,5 @@ output "app_service_name" {
 
 output "app_service_default_hostname" {
   value = "https://${azurerm_app_service.webapp.default_site_hostname}"
+}
 }
