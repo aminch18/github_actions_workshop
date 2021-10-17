@@ -10,10 +10,10 @@ on:
     branches:
       - terraformMaster
     
-  env:
-    R_GROUP_NAME: rg-github-actions-ws
-    STORAGE_ACC_NAME: tfbackend024356e
-    CONTAINER_NAME: terraform-state
+env:
+  R_GROUP_NAME: rg-github-actions-ws
+  STORAGE_ACC_NAME: tfbackend024356e
+  CONTAINER_NAME: terraform-state
 
 jobs:
   terraform:
