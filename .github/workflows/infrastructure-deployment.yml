@@ -31,7 +31,7 @@ jobs:
       - name: Terraform init azurerm backend
         uses: ahmedig/terraform-azurerm-backend@v1
         with:
-          azure_credentials: {{ secrets.AZURE_CREDENTIALS }}
+          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
           resource_group_name: ${{ env.R_GROUP_NAME }}
           container_name: ${{ env.STORAGE_ACC_NAME }}
           storage_account_name: ${{ env.CONTAINER_NAME }}
