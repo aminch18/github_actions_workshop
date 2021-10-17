@@ -25,9 +25,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Azure login
-        uses: azure/login@v1
-        with:
-          creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.AZ_SUSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
+        run: az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}
 
       - uses: hashicorp/setup-terraform@v1
         with:
