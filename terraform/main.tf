@@ -1,5 +1,4 @@
 provider "azurerm" {
-  version = "=2.0.0"
   features {}
 }
 
@@ -9,6 +8,12 @@ terraform {
     storage_account_name = "tfbackend024356e"
     container_name       = "terraform-state"
     key                  = "terraform.tfstate"
+  }
+
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=2.46.0"
   }
 }
 
